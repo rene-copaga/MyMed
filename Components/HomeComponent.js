@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Books from '../redux/Books';
+import TreatmentComponent from './TreatmentComponent'
 
 class HomeComponent extends Component {
 
@@ -15,7 +16,7 @@ class HomeComponent extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Books />
+                <TreatmentComponent />
             </View>
         );
     }
