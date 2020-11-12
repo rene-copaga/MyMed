@@ -7,38 +7,32 @@
  */
 
 import React, { Component } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import HomeComponent from './Components/HomeComponent';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './redux/reducers';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeComponent from './components/HomeComponent';
 
-const AppNavigator = createStackNavigator(
-  {
-    Home: HomeComponent,
-  },
-  {
-    initialRouteName: "Home"
-  }
-);
+const Stack = createStackNavigator();
 
-const AppContainer = createAppContainer(AppNavigator);
+const store = createStore(rootReducer)
+
 export default class App extends Component {
   render() {
-    return <AppContainer />;
+    return (
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={HomeComponent}
+              options={{ title: 'Home' }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    )
   }
 }
